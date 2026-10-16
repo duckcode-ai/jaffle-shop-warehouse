@@ -60,14 +60,12 @@ The first time, ZLens opens **Guided Setup**:
 
 1. **Where does your data model live?** Choose **Database only** (it is
    already selected: this folder is a database-only workspace), then
-   **Continue to database**. In `@zlens/cli` 0.1.0 this step is still titled
-   *Connect your dbt project*: there, under **No dbt project?**, click
-   **Use my warehouse**.
+   **Continue to database**.
 2. **Connect your database.** The sample's DuckDB connection is already set
    up: you see **DuckDB · configured** and **Test passed**. Under
    **Metadata scope** the schema `jaffle_shop: dev` is selected and the
    modeling catalog has 13 tables and views (`npm run sync` already
-   synchronized it). Newer versions also offer **Draft my models** here; you
+   synchronized it). **Draft my models** is offered here too; you
    can skip it, because this sample's models are already drafted and
    reviewed. Click **Continue to optional AI**.
 3. **Set up an AI provider.** Only Ask needs one. For example

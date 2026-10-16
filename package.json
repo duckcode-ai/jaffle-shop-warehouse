@@ -12,7 +12,7 @@
     "validate": "zlens validate . && zlens model validate ."
   },
   "devDependencies": {
-    "@zlens/cli": "^0.1.0"
+    "@zlens/cli": "^0.2.0"
   },
   "engines": {
     "node": ">=20"
