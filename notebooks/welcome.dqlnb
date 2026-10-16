@@ -1,0 +1,34 @@
+{
+  "dqlnbVersion": 2,
+  "version": 1,
+  "title": "Jaffle Shop warehouse",
+  "metadata": {
+    "description": "Start here: query the Jaffle Shop warehouse directly, no dbt.",
+    "createdWith": "dql",
+    "ownerDomain": "dev",
+    "usesDomains": [
+      "dev"
+    ],
+    "requiredExports": []
+  },
+  "cells": [
+    {
+      "id": "start-here",
+      "type": "markdown",
+      "name": "Start here",
+      "content": "# Jaffle Shop warehouse\n\nThis workspace reads a plain DuckDB warehouse (`jaffle_shop.duckdb`, schema `dev`). There is no dbt project: ZLens synced the tables, columns and keys, drafted the entities and joins, and a person checked and certified the five joins between the mart tables (**Modeling**).\n\nRun the two queries below, then ask a question in **Ask**, for example: *Who are the top 10 customers by lifetime spend?*"
+    },
+    {
+      "id": "top-customers",
+      "type": "sql",
+      "name": "Top customers by lifetime spend",
+      "content": "SELECT customer_name, count_lifetime_orders, lifetime_spend\nFROM dev.customers\nORDER BY lifetime_spend DESC\nLIMIT 10"
+    },
+    {
+      "id": "monthly-revenue",
+      "type": "sql",
+      "name": "Monthly revenue by store",
+      "content": "SELECT\n  date_trunc('month', orders.ordered_at) AS month,\n  locations.location_name,\n  SUM(orders.order_total) AS revenue,\n  COUNT(*) AS order_count\nFROM dev.orders AS orders\nJOIN dev.locations AS locations ON orders.location_id = locations.location_id\nGROUP BY 1, 2\nORDER BY 1, 2"
+    }
+  ]
+}

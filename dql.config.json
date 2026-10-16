@@ -1,0 +1,41 @@
+{
+  "project": "jaffle-shop-warehouse",
+  "layout": {
+    "version": 2,
+    "mode": "oss-dbt-workspace",
+    "skillsPath": "skills"
+  },
+  "apps": {
+    "datasets": true
+  },
+  "identity": {
+    "owner": "analytics@jaffle.shop"
+  },
+  "defaultConnectionName": "default",
+  "connections": {
+    "default": {
+      "driver": "duckdb",
+      "filepath": "jaffle_shop.duckdb"
+    }
+  },
+  "semanticLayer": {
+    "provider": "dql"
+  },
+  "manifestVersion": 3,
+  "modeling": {
+    "mode": "warehouse-first"
+  },
+  "metadataScopes": {
+    "default": {
+      "mode": "selected_scopes",
+      "scopes": [
+        {
+          "catalogOrDatabase": "jaffle_shop",
+          "schemas": [
+            "dev"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,266 @@
+entities:
+  - id: customer
+    relation: jaffle_shop.dev.customers
+    business_name: Customer
+    status: draft
+    grain: customer_id
+    keys:
+      - customer_id
+  - id: location
+    relation: jaffle_shop.dev.locations
+    business_name: Location
+    status: draft
+    grain: location_id
+    keys:
+      - location_id
+  - id: metricflow_time_spine
+    relation: jaffle_shop.dev.metricflow_time_spine
+    business_name: Metricflow Time Spine
+    status: draft
+  - id: order_item
+    relation: jaffle_shop.dev.order_items
+    business_name: Order Item
+    status: draft
+    grain: order_item_id
+    keys:
+      - order_item_id
+  - id: order
+    relation: jaffle_shop.dev.orders
+    business_name: Order
+    status: draft
+    grain: order_id
+    keys:
+      - order_id
+  - id: product
+    relation: jaffle_shop.dev.products
+    business_name: Product
+    status: draft
+    grain: product_id
+    keys:
+      - product_id
+  - id: stg_customers
+    relation: jaffle_shop.dev.stg_customers
+    business_name: Customer
+    status: draft
+  - id: stg_locations
+    relation: jaffle_shop.dev.stg_locations
+    business_name: Location
+    status: draft
+  - id: stg_order_items
+    relation: jaffle_shop.dev.stg_order_items
+    business_name: Order Item
+    status: draft
+  - id: stg_orders
+    relation: jaffle_shop.dev.stg_orders
+    business_name: Order
+    status: draft
+  - id: stg_products
+    relation: jaffle_shop.dev.stg_products
+    business_name: Product
+    status: draft
+  - id: supply
+    relation: jaffle_shop.dev.stg_supplies
+    business_name: Supply
+    status: draft
+  - id: supplies
+    relation: jaffle_shop.dev.supplies
+    business_name: Supply
+    status: draft
+    grain: supply_uuid
+    keys:
+      - supply_uuid
+relationships:
+  - id: customer_to_stg_customers
+    from: customer
+    to: stg_customers
+    keys:
+      - from: customer_id
+        to: customer_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have customer_id
+  - id: location_to_stg_locations
+    from: location
+    to: stg_locations
+    keys:
+      - from: location_id
+        to: location_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have location_id
+  - id: order_item_to_stg_order_items
+    from: order_item
+    to: stg_order_items
+    keys:
+      - from: order_item_id
+        to: order_item_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have order_item_id
+  - id: order_to_stg_orders
+    from: order
+    to: stg_orders
+    keys:
+      - from: order_id
+        to: order_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have order_id
+  - id: product_to_stg_products
+    from: product
+    to: stg_products
+    keys:
+      - from: product_id
+        to: product_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have product_id
+  - id: stg_customers_to_customer
+    from: stg_customers
+    to: customer
+    keys:
+      - from: customer_id
+        to: customer_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have customer_id
+  - id: stg_locations_to_location
+    from: stg_locations
+    to: location
+    keys:
+      - from: location_id
+        to: location_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have location_id
+  - id: stg_order_items_to_order_item
+    from: stg_order_items
+    to: order_item
+    keys:
+      - from: order_item_id
+        to: order_item_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have order_item_id
+  - id: stg_order_items_to_order
+    from: stg_order_items
+    to: order
+    keys:
+      - from: order_id
+        to: order_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have order_id
+  - id: stg_order_items_to_product
+    from: stg_order_items
+    to: product
+    keys:
+      - from: product_id
+        to: product_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have product_id
+  - id: stg_orders_to_customer
+    from: stg_orders
+    to: customer
+    keys:
+      - from: customer_id
+        to: customer_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have customer_id
+  - id: stg_orders_to_location
+    from: stg_orders
+    to: location
+    keys:
+      - from: location_id
+        to: location_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have location_id
+  - id: stg_orders_to_order
+    from: stg_orders
+    to: order
+    keys:
+      - from: order_id
+        to: order_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have order_id
+  - id: stg_products_to_product
+    from: stg_products
+    to: product
+    keys:
+      - from: product_id
+        to: product_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have product_id
+  - id: supply_to_product
+    from: supply
+    to: product
+    keys:
+      - from: product_id
+        to: product_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have product_id
+  - id: supply_to_supplies
+    from: supply
+    to: supplies
+    keys:
+      - from: supply_id
+        to: supply_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have supply_id
+  - id: supplies_to_supply
+    from: supplies
+    to: supply
+    keys:
+      - from: supply_id
+        to: supply_id
+    cardinality: unknown
+    fanout: unknown
+    status: draft
+    rationale: both models have supply_id
+  - id: order_item_to_product_by_product_name
+    from: order_item
+    to: product
+    keys:
+      - from: product_name
+        to: product_name
+    cardinality: many_to_one
+    fanout: safe
+    status: draft
+    rationale: product_name is unique in products, and 90900 of 90900 order_items values are found there
+    validation:
+      status: passed
+      checked_at: '2026-10-16T02:19:10.108Z'
+      query_fingerprint: 8191f184b5e229c3980e2eebcc3ed1d34f633b9cb03243463d60b3549d26985b
+      proof_fingerprint: 9b68d2a51e103fbbc6811452423811c70e684d07b28617ccb060fe011ef1042c
+      from_rows: 90900
+      to_rows: 10
+      joined_rows: 90900
+      from_null_keys: 0
+      to_null_keys: 0
+      unmatched_from: 0
+      max_from_per_key: 14325
+      max_to_per_key: 1
+      message: Warehouse evidence matches the declared cardinality and safe fanout policy.

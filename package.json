@@ -1,0 +1,20 @@
+{
+  "name": "jaffle-shop-warehouse",
+  "private": true,
+  "description": "Jaffle Shop as a plain DuckDB warehouse with a ready-made ZLens database-only workspace (no dbt).",
+  "scripts": {
+    "notebook": "zlens notebook . --port 3474",
+    "sync": "zlens sync warehouse .",
+    "draft": "zlens model discover . --validate",
+    "compile": "zlens compile .",
+    "lineage": "zlens lineage",
+    "doctor": "zlens doctor .",
+    "validate": "zlens validate . && zlens model validate ."
+  },
+  "devDependencies": {
+    "@zlens/cli": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

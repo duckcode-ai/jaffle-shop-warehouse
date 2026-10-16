@@ -1,0 +1,590 @@
+{
+  "version": 1,
+  "driver": "duckdb",
+  "connectionId": "default",
+  "scopes": [
+    {
+      "catalogOrDatabase": "jaffle_shop",
+      "schemas": [
+        "dev"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "warehouse.dev.customers",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "customers",
+      "relation": "jaffle_shop.dev.customers",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "customer_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "count_lifetime_orders",
+          "type": "BIGINT",
+          "nullable": true
+        },
+        {
+          "name": "first_ordered_at",
+          "type": "TIMESTAMP",
+          "nullable": true
+        },
+        {
+          "name": "last_ordered_at",
+          "type": "TIMESTAMP",
+          "nullable": true
+        },
+        {
+          "name": "lifetime_spend_pretax",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        },
+        {
+          "name": "lifetime_tax_paid",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        },
+        {
+          "name": "lifetime_spend",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        },
+        {
+          "name": "customer_type",
+          "type": "VARCHAR",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 935
+    },
+    {
+      "id": "warehouse.dev.locations",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "locations",
+      "relation": "jaffle_shop.dev.locations",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "location_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "location_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "tax_rate",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "opened_date",
+          "type": "TIMESTAMP",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 6
+    },
+    {
+      "id": "warehouse.dev.metricflow_time_spine",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "metricflow_time_spine",
+      "relation": "jaffle_shop.dev.metricflow_time_spine",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "date_day",
+          "type": "DATE",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 3651
+    },
+    {
+      "id": "warehouse.dev.order_items",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "order_items",
+      "relation": "jaffle_shop.dev.order_items",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "ordered_at",
+          "type": "TIMESTAMP",
+          "nullable": true
+        },
+        {
+          "name": "product_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_price",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_food_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "is_drink_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "supply_cost",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 90900
+    },
+    {
+      "id": "warehouse.dev.orders",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "orders",
+      "relation": "jaffle_shop.dev.orders",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "location_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "customer_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "subtotal_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "tax_paid_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "order_total_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "subtotal",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "tax_paid",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "order_total",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "ordered_at",
+          "type": "TIMESTAMP",
+          "nullable": true
+        },
+        {
+          "name": "order_cost",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        },
+        {
+          "name": "order_items_subtotal",
+          "type": "DECIMAL(38,2)",
+          "nullable": true
+        },
+        {
+          "name": "count_food_items",
+          "type": "HUGEINT",
+          "nullable": true
+        },
+        {
+          "name": "count_drink_items",
+          "type": "HUGEINT",
+          "nullable": true
+        },
+        {
+          "name": "count_order_items",
+          "type": "BIGINT",
+          "nullable": true
+        },
+        {
+          "name": "is_food_order",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "is_drink_order",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "customer_order_number",
+          "type": "BIGINT",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 61948
+    },
+    {
+      "id": "warehouse.dev.products",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "products",
+      "relation": "jaffle_shop.dev.products",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_type",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_description",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_price",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_food_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "is_drink_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 10
+    },
+    {
+      "id": "warehouse.dev.stg_customers",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_customers",
+      "relation": "jaffle_shop.dev.stg_customers",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "customer_name",
+          "type": "VARCHAR",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_customers AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_customers), renamed AS (SELECT id AS customer_id, \"name\" AS customer_name FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.stg_locations",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_locations",
+      "relation": "jaffle_shop.dev.stg_locations",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "location_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "location_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "tax_rate",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "opened_date",
+          "type": "TIMESTAMP",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_locations AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_stores), renamed AS (SELECT id AS location_id, \"name\" AS location_name, tax_rate, date_trunc('day', opened_at) AS opened_date FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.stg_order_items",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_order_items",
+      "relation": "jaffle_shop.dev.stg_order_items",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_order_items AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_items), renamed AS (SELECT id AS order_item_id, order_id, sku AS product_id FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.stg_orders",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_orders",
+      "relation": "jaffle_shop.dev.stg_orders",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "location_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "customer_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "subtotal_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "tax_paid_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "order_total_cents",
+          "type": "INTEGER",
+          "nullable": true
+        },
+        {
+          "name": "subtotal",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "tax_paid",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "order_total",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "ordered_at",
+          "type": "TIMESTAMP",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_orders AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_orders), renamed AS (SELECT id AS order_id, store_id AS location_id, customer AS customer_id, subtotal AS subtotal_cents, tax_paid AS tax_paid_cents, order_total AS order_total_cents, CAST((subtotal / 100) AS DECIMAL(16,2)) AS subtotal, CAST((tax_paid / 100) AS DECIMAL(16,2)) AS tax_paid, CAST((order_total / 100) AS DECIMAL(16,2)) AS order_total, date_trunc('day', ordered_at) AS ordered_at FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.stg_products",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_products",
+      "relation": "jaffle_shop.dev.stg_products",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_type",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_description",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_price",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_food_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        },
+        {
+          "name": "is_drink_item",
+          "type": "BOOLEAN",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_products AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_products), renamed AS (SELECT sku AS product_id, \"name\" AS product_name, \"type\" AS product_type, description AS product_description, CAST((price / 100) AS DECIMAL(16,2)) AS product_price, COALESCE((\"type\" = 'jaffle'), CAST('f' AS BOOLEAN)) AS is_food_item, COALESCE((\"type\" = 'beverage'), CAST('f' AS BOOLEAN)) AS is_drink_item FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.stg_supplies",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "stg_supplies",
+      "relation": "jaffle_shop.dev.stg_supplies",
+      "kind": "view",
+      "columns": [
+        {
+          "name": "supply_uuid",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_cost",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_perishable_supply",
+          "type": "BOOLEAN",
+          "nullable": true
+        }
+      ],
+      "viewSql": "CREATE VIEW dev.stg_supplies AS WITH \"source\" AS (SELECT * FROM jaffle_shop.raw.raw_supplies), renamed AS (SELECT md5(CAST(((COALESCE(CAST(id AS VARCHAR), '_dbt_utils_surrogate_key_null_') || '-') || COALESCE(CAST(sku AS VARCHAR), '_dbt_utils_surrogate_key_null_')) AS VARCHAR)) AS supply_uuid, id AS supply_id, sku AS product_id, \"name\" AS supply_name, CAST((\"cost\" / 100) AS DECIMAL(16,2)) AS supply_cost, perishable AS is_perishable_supply FROM \"source\")SELECT * FROM renamed;"
+    },
+    {
+      "id": "warehouse.dev.supplies",
+      "database": "jaffle_shop",
+      "schema": "dev",
+      "name": "supplies",
+      "relation": "jaffle_shop.dev.supplies",
+      "kind": "table",
+      "columns": [
+        {
+          "name": "supply_uuid",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "product_id",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_name",
+          "type": "VARCHAR",
+          "nullable": true
+        },
+        {
+          "name": "supply_cost",
+          "type": "DECIMAL(16,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_perishable_supply",
+          "type": "BOOLEAN",
+          "nullable": true
+        }
+      ],
+      "rowCountEstimate": 65
+    }
+  ],
+  "capturedAt": "2026-10-16T02:18:47.841Z",
+  "fingerprint": "681422b6800ebc6683ca201e729567a80f5eef84ae5bb864f6ec9d5c7af52826"
+}

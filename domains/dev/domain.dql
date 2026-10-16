@@ -1,0 +1,6 @@
+domain "Jaffle Shop" {
+  id = "dev"
+  owner = "analytics@jaffle.shop"
+  reviewCadence = "quarterly"
+  description = "The Jaffle Shop warehouse (schema dev): stores, customers, orders, order lines, products and supplies. Drafted from the warehouse catalog; the five joins between the mart tables are checked on the data and certified. The staging views stay drafts."
+}
