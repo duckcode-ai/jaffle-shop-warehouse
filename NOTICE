@@ -17,6 +17,10 @@ sandbox project of a fictional sandwich shop by dbt Labs
 story, its seed data and the shape of the staging and mart models come from
 that project. Thanks to dbt Labs and its contributors.
 
+The seed rows (and so the rows in this database) were produced by dbt Labs'
+jaffle-shop-generator (https://github.com/dbt-labs/jaffle-shop-generator),
+licensed under the Apache License 2.0.
+
 Note: dbt-labs/jaffle-shop does not carry a licence file; jaffle-shop-duckdb
 is published under the MIT licence. This repository contains no dbt project
 files, only the database built from jaffle-shop-duckdb and a ZLens workspace.
