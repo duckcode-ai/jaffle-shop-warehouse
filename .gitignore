@@ -1,0 +1,35 @@
+node_modules/
+# npm install writes this; the CLI version is set in package.json
+/package-lock.json
+
+# DuckDB: the sample warehouse is checked in on purpose; anything else is local
+*.duckdb
+!/jaffle_shop.duckdb
+*.duckdb.wal
+
+# ZLens local runtime state. ZLens keeps its files under .dql/ and expects
+# granular ignores: .dql/warehouse-catalog.json (the synced catalog) is shared.
+dql-manifest.json
+*.dqlnb.run.json
+*.dql.run.json
+*.run.json
+.DS_Store
+**/.dql/runs/
+**/.dql/cache/
+**/.dql/imports/
+**/.dql/local/
+**/.dql/runtimes/
+**/.dql/connectors/
+**/.dql/memory/
+**/.dql/migration-staging/
+**/.dql/docker-starter/
+**/.dql/oauth-credentials.json
+**/.dql/provider-settings.json
+**/.dql/semantic-runtime-settings.json
+**/.dql/mcp-servers.json
+**/.dql-user-prefs.json
+
+# Local AI agent client config written by `zlens connect`
+.mcp.json
+.codex/
+.cursor/
