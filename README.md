@@ -31,7 +31,8 @@ There are no dbt files. Nothing here needs Python.
 
 ## Before you start
 
-- Node.js 20 or newer (`node -v`)
+- Node.js 20, 22 or 24, with 24 LTS recommended (`node -v`). Node 25 and 26
+  are not supported yet: ZLens's DuckDB driver has no prebuilt binary for them.
 - git
 
 ## 1. Install ZLens and open the workbench
@@ -165,6 +166,10 @@ first, then refresh the catalog with `npm run sync`.
 
 ## Troubleshooting
 
+- **`ZLens's DuckDB driver has no prebuilt binary for Node 26 yet`.** You are
+  on Node 25 or 26. Switch to Node 24 LTS or 22 (`nvm install 24`, or
+  `fnm use 24`), then run `npm run notebook` again: the driver installs on its
+  own.
 - **`Could not set lock on file ".../jaffle_shop.duckdb"`.** Another process
   has the database open, usually the running workbench. Stop it with `Ctrl+C`,
   run your command, then start `npm run notebook` again. (`npm run doctor`
