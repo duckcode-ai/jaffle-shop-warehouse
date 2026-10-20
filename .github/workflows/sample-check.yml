@@ -1,0 +1,39 @@
+# Runs the README's step 1 (without `npm run notebook`) and checks that the
+# workspace validates.
+name: Sample check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sample-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Sample check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Install ZLens
+        run: |
+          npm install
+          npm install --prefix .dql/connectors duckdb
+
+      - name: Sync
+        run: npm run sync
+
+      - name: Validate
+        run: npm run validate
