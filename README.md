@@ -149,7 +149,8 @@ a certification.
 [jaffle-shop-duckdb](https://github.com/duckcode-ai/jaffle-shop-duckdb) builds
 at commit `a9ec277` (`dbt deps`, `dbt seed`, `dbt build` with dbt-duckdb).
 `scripts/rebuild-warehouse.sh` repeats that build in a temporary folder and
-copies the result here (needs Python 3.9–3.14 for dbt). Stop the workbench
+copies the result here (needs Python 3.9–3.14 for dbt). It builds with
+DuckDB 1.4 (`duckdb>=1.4,<1.5`), the release line ZLens reads. Stop the workbench
 first, then refresh the catalog with `npm run sync`.
 
 ## Useful commands
@@ -174,6 +175,15 @@ first, then refresh the catalog with `npm run sync`.
   has the database open, usually the running workbench. Stop it with `Ctrl+C`,
   run your command, then start `npm run notebook` again. (`npm run doctor`
   reports this too while the workbench runs.)
+- **`Trying to read a database file with version number 999, but we can only
+  read versions between 64 and 67. The database file was created with an
+  newer version of DuckDB.`** (in the Setup "Test" button, Settings or
+  `npm run doctor`). `jaffle_shop.duckdb` was rewritten by DuckDB 2.0 (for
+  example the `duckdb` CLI or Python `duckdb` 2.0), and ZLens reads files from
+  DuckDB 1.4. Restore the shipped file with
+  `git checkout -- jaffle_shop.duckdb`, or rebuild it with
+  `./scripts/rebuild-warehouse.sh`, which pins `duckdb>=1.4,<1.5`. To change
+  the file yourself, use DuckDB 1.4 (`pip install 'duckdb>=1.4,<1.5'`).
 - **Port 3474 is in use.** Stop the other workbench, or run
   `npx zlens notebook . --port 3480`.
 - **Ask says no AI provider is configured.** Finish step 3 of Guided Setup,

@@ -7,6 +7,7 @@
 #
 #   1. clone jaffle-shop-duckdb at the pinned commit into a temporary folder
 #   2. create a Python virtual environment with its requirements (dbt-duckdb)
+#      and DuckDB 1.4, the release line ZLens reads
 #   3. dbt deps, dbt seed, dbt build (the steps in that repo's README)
 #   4. copy its jaffle_shop.duckdb here
 #
@@ -20,6 +21,8 @@ set -euo pipefail
 SOURCE_REPO="${SOURCE_REPO:-https://github.com/duckcode-ai/jaffle-shop-duckdb.git}"
 SOURCE_COMMIT="${SOURCE_COMMIT:-a9ec27779995708d961a6cfcad9ee5c049573e6e}"
 PYTHON_BIN="${PYTHON:-python3}"
+# The DuckDB release line ZLens reads (its Node driver is DuckDB 1.4).
+DUCKDB_PIN="${DUCKDB_PIN:-duckdb>=1.4,<1.5}"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/jaffle-shop-warehouse.XXXXXX")"
@@ -36,6 +39,11 @@ echo "[2/4] Installing dbt-duckdb into a virtual environment…"
 "$PYTHON_BIN" -m venv .venv
 .venv/bin/python -m pip install --quiet --upgrade pip --progress-bar off
 .venv/bin/python -m pip install --quiet -r requirements.txt --progress-bar off
+# ZLens reads the file with DuckDB 1.4; DuckDB 2.0 writes files 1.4 cannot open
+# ("version number 999 ... created with an newer version of DuckDB"). Pin the
+# engine even when the source commit's requirements do not.
+.venv/bin/python -m pip install --quiet "$DUCKDB_PIN" --progress-bar off
+echo "Using DuckDB $(.venv/bin/python -c 'import duckdb; print(duckdb.__version__)')."
 
 echo "[3/4] Building the dbt project (deps, seed, build)…"
 .venv/bin/dbt deps --profiles-dir .
