@@ -59,17 +59,18 @@ npm run notebook
 
 The first time, ZLens opens **Guided Setup**:
 
-1. **Where does your data model live?** Choose **Database only** (it is
-   already selected: this folder is a database-only workspace), then
-   **Continue to database**.
-2. **Connect your database.** The sample's DuckDB connection is already set
-   up: you see **DuckDB · configured** and **Test passed**. Under
-   **Metadata scope** the schema `jaffle_shop: dev` is selected and the
-   modeling catalog has 13 tables and views (`npm run sync` already
-   synchronized it). **Draft my models** is offered here too; you
-   can skip it, because this sample's models are already drafted and
-   reviewed. Click **Continue to optional AI**.
-3. **Set up an AI provider.** Only Ask needs one. For example
+1. **Where does your data model live?** **Open an existing ZLens project**
+   is already selected: this folder's `dql.config.json` sets up the data
+   model as **Database only**. Click **Continue to credentials**.
+2. **Connect and synchronize.** The sample's DuckDB connection is already set
+   up: you see **DuckDB · configured** and **Test passed**. Under **Which
+   schemas should ZLens read?** the modeling catalog already has 13 tables
+   and views (`npm run sync` synchronized it), so there is nothing to
+   synchronize. This sample's models are already drafted and reviewed.
+   Click **Continue to optional AI**.
+3. **Set up an AI provider.** Optional: without one, setup, the notebook,
+   Modeling and lineage work, and the AI features (Ask, Ask about an App,
+   Notebook AI) say they need a provider. For example
    **Anthropic Claude → Subscription**: if the `claude` CLI is signed in on
    this machine, open **Prefer the CLI?**, then **Test, save & activate**. An
    API key works too; see
