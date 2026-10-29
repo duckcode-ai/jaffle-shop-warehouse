@@ -15,7 +15,7 @@
     "@zlens/cli": "^0.2.1"
   },
   "engines": {
-    "node": "^20.0.0 || ^22.0.0 || ^24.0.0"
+    "node": "^20.0.0 || ^22.0.0 || ^24.0.0 || ^26.0.0"
   },
   "allowScripts": {
     "better-sqlite3": true

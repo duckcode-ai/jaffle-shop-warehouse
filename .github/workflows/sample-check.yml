@@ -20,28 +20,31 @@ jobs:
     name: Sample check
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22", "26"]
 
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
-          node-version: "22"
+          node-version: ${{ matrix.node }}
 
       - name: Install ZLens
         run: |
           npm install
-          npm install --prefix .dql/connectors duckdb
+          npm install --prefix .dql/connectors '@duckdb/node-api@^1.5.6-r.1'
 
       - name: Open the database with ZLens's DuckDB driver
         # Fails if jaffle_shop.duckdb was written by a DuckDB that ZLens
         # cannot read (for example DuckDB 2.0).
         run: |
           node -e "
-            const { Database } = require('./.dql/connectors/node_modules/duckdb');
-            new Database('jaffle_shop.duckdb', { access_mode: 'READ_ONLY' }, (err) => {
-              if (err) { console.error(err.message); process.exit(1); }
-              console.log('jaffle_shop.duckdb opens with the ZLens DuckDB driver');
-            });
+            const { DuckDBInstance } = require('./.dql/connectors/node_modules/@duckdb/node-api');
+            DuckDBInstance.create('jaffle_shop.duckdb', { access_mode: 'READ_ONLY' })
+              .then((db) => { db.closeSync(); console.log('jaffle_shop.duckdb opens with the ZLens DuckDB driver'); })
+              .catch((err) => { console.error(err.message); process.exit(1); });
           "
 
       - name: Sync
