@@ -1,0 +1,20 @@
+{
+  "name": "ZLens: Jaffle Shop, database only",
+  // Node 26 LTS. The warehouse is the jaffle_shop.duckdb file in this repo, so
+  // there is nothing to build: install ZLens and open the workbench.
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:26",
+  "hostRequirements": { "cpus": 2, "memory": "4gb" },
+  "postCreateCommand": "npm install --no-audit --no-fund",
+  "postStartCommand": "sh .devcontainer/start-zlens.sh",
+  // Prints a clickable link to ZLens in the terminal once it answers.
+  "postAttachCommand": "sh .devcontainer/show-link.sh",
+  "forwardPorts": [3474],
+  "portsAttributes": {
+    // openPreview opens ZLens inside the codespace window: a new browser tab
+    // would be blocked as a pop-up.
+    "3474": { "label": "ZLens", "onAutoForward": "openPreview" }
+  },
+  "customizations": {
+    "codespaces": { "openFiles": ["README.md"] }
+  }
+}
