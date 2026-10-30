@@ -31,8 +31,7 @@ There are no dbt files. Nothing here needs Python.
 
 ## Before you start
 
-- Node.js 20, 22 or 24, with 24 LTS recommended (`node -v`). Node 25 and 26
-  are not supported yet: ZLens's DuckDB driver has no prebuilt binary for them.
+- Node.js 20, 22, 24 or 26, with 26 LTS recommended (`node -v`).
 - git
 
 ## 1. Install ZLens and open the workbench
@@ -41,15 +40,15 @@ There are no dbt files. Nothing here needs Python.
 git clone https://github.com/duckcode-ai/jaffle-shop-warehouse.git
 cd jaffle-shop-warehouse
 npm install
-npm install --prefix .dql/connectors duckdb
 npm run sync
 npm run notebook
 ```
 
 - `npm install` installs the ZLens CLI (`@zlens/cli`) into this folder.
   `npx zlens …` runs it; no global install is needed.
-- The second command installs the DuckDB driver ZLens queries with.
-- `npm run sync` runs `zlens sync warehouse`: it reads the schema `dev` again
+- `npm run sync` runs `zlens sync warehouse`. The first time, it installs the
+  DuckDB driver ZLens queries with into `.dql/connectors`
+  (`Installing the DuckDB driver…`). Then it reads the schema `dev` again
   and ends with `✓ Warehouse catalog: 13 relation(s) → .dql/warehouse-catalog.json`.
   On this unchanged file only the catalog's `capturedAt` time changes.
 - `npm run notebook` prints `Notebook ready: http://127.0.0.1:3474` and opens
@@ -74,7 +73,7 @@ The first time, ZLens opens **Guided Setup**:
    **Anthropic Claude → Subscription**: if the `claude` CLI is signed in on
    this machine, open **Prefer the CLI?**, then **Test, save & activate**. An
    API key works too; see
-   [Set up an AI provider](https://duckcode-ai-labs.github.io/zlens/get-started/ai-provider/).
+   [Set up an AI provider](https://docs.zlens.app/get-started/ai-provider/).
    Keys stay in `.dql/` on your machine and are ignored by git. Click
    **Continue to finish**.
 4. Click **Finish setup**. ZLens opens **Ask**.
@@ -151,7 +150,7 @@ a certification.
 at commit `a9ec277` (`dbt deps`, `dbt seed`, `dbt build` with dbt-duckdb).
 `scripts/rebuild-warehouse.sh` repeats that build in a temporary folder and
 copies the result here (needs Python 3.9–3.14 for dbt). It builds with
-DuckDB 1.4 (`duckdb>=1.4,<1.5`), the release line ZLens reads. Stop the workbench
+DuckDB 1.4 (`duckdb>=1.4,<1.5`), which every ZLens release reads. Stop the workbench
 first, then refresh the catalog with `npm run sync`.
 
 ## Useful commands
@@ -168,10 +167,13 @@ first, then refresh the catalog with `npm run sync`.
 
 ## Troubleshooting
 
-- **`ZLens's DuckDB driver has no prebuilt binary for Node 26 yet`.** You are
-  on Node 25 or 26. Switch to Node 24 LTS or 22 (`nvm install 24`, or
-  `fnm use 24`), then run `npm run notebook` again: the driver installs on its
-  own.
+- **`ZLens could not load @duckdb/node-api`** (its binary for this computer is
+  missing). The DuckDB driver's binary comes as an optional dependency,
+  so it is missing after `--omit=optional`, or in a `.dql` folder copied from
+  another operating system. ZLens reinstalls it when it starts; by hand:
+  `npm --prefix .dql/connectors install @duckdb/node-api --include=optional`.
+  (Older ZLens used the `duckdb` package; you can delete
+  `.dql/connectors/node_modules/duckdb`.)
 - **`Could not set lock on file ".../jaffle_shop.duckdb"`.** Another process
   has the database open, usually the running workbench. Stop it with `Ctrl+C`,
   run your command, then start `npm run notebook` again. (`npm run doctor`
@@ -181,7 +183,7 @@ first, then refresh the catalog with `npm run sync`.
   newer version of DuckDB.`** (in the Setup "Test" button, Settings or
   `npm run doctor`). `jaffle_shop.duckdb` was rewritten by DuckDB 2.0 (for
   example the `duckdb` CLI or Python `duckdb` 2.0), and ZLens reads files from
-  DuckDB 1.4. Restore the shipped file with
+  DuckDB 1.5 and older. Restore the shipped file with
   `git checkout -- jaffle_shop.duckdb`, or rebuild it with
   `./scripts/rebuild-warehouse.sh`, which pins `duckdb>=1.4,<1.5`. To change
   the file yourself, use DuckDB 1.4 (`pip install 'duckdb>=1.4,<1.5'`).
