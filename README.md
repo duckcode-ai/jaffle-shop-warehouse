@@ -10,6 +10,22 @@ It is the same data as the dbt sample,
 [jaffle-shop-duckdb](https://github.com/duckcode-ai/jaffle-shop-duckdb), so you
 can compare the two paths side by side.
 
+## Try it in one click
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/duckcode-ai/jaffle-shop-warehouse?quickstart=1)
+
+Click the button, then **Create codespace**. The codespace runs Node 26,
+installs ZLens with `npm install` and opens the workbench on this workspace
+in a panel, in a couple of minutes, with nothing to install on your computer.
+The terminal prints a link that opens it in its own tab; if nothing opened,
+click **Ports**, then the globe next to **ZLens (3474)**. Guided Setup opens
+on **Open an existing ZLens project**: follow
+[step 2](#2-guided-setup-database-only) and [step 3](#3-first-answer) below. It uses your GitHub account's
+free Codespaces hours; stop it at
+[github.com/codespaces](https://github.com/codespaces) when you're done.
+
+To run it on your own computer instead, follow the steps below.
+
 > [!IMPORTANT]
 > This folder **is already a ZLens workspace** (`dql.config.json` is at the
 > root). Install ZLens into it with `npm install`; do not run
